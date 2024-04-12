@@ -1,18 +1,27 @@
 import React from "react";
 import "./App.css";
-import useInterval from "./customHooks/useInterval";
+import useDebounce from "./customHooks/useDebounce";
 
 function App() {
-	const [count, setCount] = React.useState(0);
+	const [inputQuery, setInputQuery] = React.useState("");
+	const debouncedValue = useDebounce(inputQuery, 1000);
 
-	function Increment() {
-		setCount((currentCount) => currentCount + 1);
+
+	function handleChange(e) {
+		setInputQuery(e.target.value);
 	}
 
-	useInterval(Increment, 1000);
+	//the role of the debouncing function is delay the execution at certain second regularly.
 	return (
 		<div className="text-red-950 font-normal bg-yellow-500  p-3 gap-2 grid-cols-1 text-center  ">
-			The timer is at count {count}
+			<input
+				type="text"
+				name="query"
+				id="query"
+				value={inputQuery}
+				onChange={handleChange}
+			/>
+			<p>The debounced value is {debouncedValue}</p>
 		</div>
 	);
 }
