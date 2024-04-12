@@ -25,14 +25,16 @@ function App() {
 export default App;
 
 async function dataFetcher(url) {
-	// axios({
-	// 	method: "get",
-	// 	url: url,
-	// }).then((response) => response.data);
+	const data = await axios({
+		method: "get",
+		url: url,
+	}).then((response) => response.data);
 
-	const response = await fetch(url);
-	const data = await response.json();
 	return data;
+
+	// const response = await fetch(url);
+	// const data = await response.json();
+	// return data;
 }
 
 function useSWRData(url) {
